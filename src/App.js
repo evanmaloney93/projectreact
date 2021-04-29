@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import { unstable_renderSubtreeIntoContainer } from 'react-dom';
+import Tweet from './tweet'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+function App(){
+
+  const [isRed, setRed] = useState(false);
+  const [count, setCount] = useState(0);
+
+  const [users, setUser] = useState([
+    {name: 'Evan', message: 'Hello There', likes :'1'} ,
+    {name: 'Jorah', message: 'Khalesi pls', likes :'22' },
+    {name: 'Ned', message: 'Winter is coming' ,likes :'333' }
+  ]
+  );
+
+  const increment = () => {
+    setCount(count + 1);
+    setRed(!isRed);
+  }
+
+  return(
+    <div className='app'>
+      {users.map(user=>(
+        <Tweet name={user.name} message ={user.message} likes ={user.likes}/>
+      ))}
     </div>
   );
 }
